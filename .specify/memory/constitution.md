@@ -277,6 +277,32 @@ Activity types tracked: SIGN_UP, SIGN_IN, SIGN_OUT, UPDATE_PASSWORD, DELETE_ACCO
 
 ## Development Workflow
 
+### Speckit-Driven Development
+
+All new features MUST follow the speckit workflow to ensure proper planning, documentation, and implementation tracking. Speckit provides a structured approach from requirements through implementation:
+
+1. **Specification** (`/speckit.specify`): Create feature specification from natural language description
+   - Generates branch and spec.md in `specs/###-feature-name/`
+   - Validates specification quality with requirements checklist
+   - Captures user needs, acceptance criteria, and success metrics (technology-agnostic)
+
+2. **Planning** (`/speckit.plan`): Generate technical implementation plan
+   - Creates plan.md with tech stack, architecture decisions, and file structure
+   - Generates research.md, data-model.md, contracts/, and quickstart.md
+   - Validates against constitution principles
+
+3. **Task Breakdown** (`/speckit.tasks`): Convert plan into actionable tasks
+   - Creates tasks.md with dependency-ordered, user-story-organized tasks
+   - Each task includes specific file paths and completion criteria
+   - Identifies parallel execution opportunities
+
+4. **Implementation** (`/speckit.implement`): Execute the task plan
+   - Validates all checklists before starting
+   - Executes tasks in dependency order
+   - Tracks progress by marking completed tasks
+
+**Rationale**: Speckit workflow enforces consistency, enables better planning, and provides clear documentation trail for all features. Detailed command documentation available in [`.roo/commands/`](.roo/commands/).
+
 ### Database Changes
 
 1. Update schema in [`lib/db/schema.ts`](health-app/lib/db/schema.ts)
@@ -285,7 +311,9 @@ Activity types tracked: SIGN_UP, SIGN_IN, SIGN_OUT, UPDATE_PASSWORD, DELETE_ACCO
 4. Apply migration: `pnpm db:migrate`
 5. Never manually edit database or run raw SQL
 
-### Feature Development
+### Feature Development (Manual Process)
+
+For quick fixes or minor changes that don't warrant full speckit workflow:
 
 1. Design API contract first (inputs, outputs, errors)
 2. Implement API route with validation
